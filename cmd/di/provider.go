@@ -2,15 +2,15 @@ package di
 
 import (
 	"oa/internal/database"
-	handler "oa/internal/handler/user"
+	"oa/internal/handler/user"
 )
 
 type Handlers struct {
-	UserHandler *handler.UserHandler
+	UserHandler *user.UserHandler
 	Database    *database.Data
 }
 
-func NewHandlers(userHandler *handler.UserHandler, database *database.Data) *Handlers {
+func NewHandlers(userHandler *user.UserHandler, database *database.Data) *Handlers {
 	return &Handlers{
 		UserHandler: userHandler,
 		Database:    database,

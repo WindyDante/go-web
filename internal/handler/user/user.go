@@ -2,15 +2,19 @@ package user
 
 import (
 	res "oa/internal/response"
+	"oa/internal/service/user"
 
 	"github.com/gin-gonic/gin"
 )
 
 type UserHandler struct {
+	userService user.UserServiceInterface
 }
 
-func NewUserHandler() *UserHandler {
-	return &UserHandler{}
+func NewUserHandler(userService user.UserServiceInterface) *UserHandler {
+	return &UserHandler{
+		userService: userService,
+	}
 }
 
 func (userHandler *UserHandler) Login() gin.HandlerFunc {

@@ -5,7 +5,7 @@ package di
 
 import (
 	"oa/internal/database"
-	handler "oa/internal/handler/user"
+	"oa/internal/handler/user"
 
 	"github.com/google/wire"
 )
@@ -26,5 +26,7 @@ var DataBaseSet = wire.NewSet(
 )
 
 var UserSet = wire.NewSet(
-	handler.NewUserHandler,
+	// user.NewUserRepository,
+	// user.NewUserService,
+	user.NewUserHandler,
 )
