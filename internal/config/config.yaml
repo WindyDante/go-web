@@ -1,0 +1,28 @@
+# 服务器配置
+server:
+  port: 65365
+  mode: debug # 可选值: debug, release
+
+auth:
+  jwt:
+    expires: 2592000 # 30天（单位秒）
+    issuer: "lin"
+    audience: "lin"
+  
+# mysql配置
+database:
+  host: ${DB_HOST}
+  port: ${DB_PORT}
+  user: ${DB_USER}
+  password: ${DB_PASSWORD}
+  dbname: ${DB_NAME}
+  charset: utf8mb4
+  parseTime: true
+  loc: Local
+
+# Redis 配置
+redis:
+  host: ${R_DB_HOST}
+  port: ${R_DB_PORT}
+  user: ${R_DB_USER}
+  password: ${R_DB_PASSWORD}
