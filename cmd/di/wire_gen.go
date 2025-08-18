@@ -9,17 +9,21 @@ package di
 import (
 	"github.com/google/wire"
 	"oa/internal/database"
-	"oa/internal/handler/user"
+	user3 "oa/internal/handler/user"
+	"oa/internal/repository/user"
+	user2 "oa/internal/service/user"
 )
 
 // Injectors from wire.go:
 
 func BuildHandlers() (*Handlers, error) {
-	userHandler := user.NewUserHandler()
 	db, err := database.NewDatabase()
 	if err != nil {
 		return nil, err
 	}
+	userRepositoryInterface := user.NewUserRepository(db)
+	userServiceInterface := user2.NewUserService(userRepositoryInterface)
+	userHandler := user3.NewUserHandler(userServiceInterface)
 	client := database.NewRedis()
 	data := database.NewData(db, client)
 	handlers := NewHandlers(userHandler, data)
@@ -30,4 +34,4 @@ func BuildHandlers() (*Handlers, error) {
 
 var DataBaseSet = wire.NewSet(database.NewDatabase, database.NewRedis, database.NewData)
 
-var UserSet = wire.NewSet(user.NewUserHandler)
+var UserSet = wire.NewSet(user.NewUserRepository, user2.NewUserService, user3.NewUserHandler)

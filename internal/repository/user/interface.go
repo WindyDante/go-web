@@ -1,3 +1,7 @@
 package user
 
-type UserRepositoryInterface interface{}
+import "oa/internal/dal/model"
+
+type UserRepositoryInterface interface {
+	GetUserByUsername(username string) (model.User, error)
+}
